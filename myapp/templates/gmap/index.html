@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html> 
+  <head> 
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
+    <title>Cities Navigator</title> 
+    <script src="/static/js/jquery-1.4.4.min.js"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAPDUET0Qt7p2VcSk6JNU1sBSM5jMcmVqUpI7aqV44cW1cEECiThQYkcZUPRJn9vy_TWxWvuLoOfSFBw" type="text/javascript"></script> 
+  </head> 
+  <body onunload="GUnload()"> 
+ 
+    <div id="id_outer_div" style="float: left;">
+      <div id="map" style="width: 800px; height: 550px; float: left;"></div>
+      <div id="id_info_window" style="float: left;">
+      More information:<br/><br/>
+      </div>
+    </div>
+ 
+ 
+    <noscript><b>JavaScript must be enabled in order for you to use Google Maps.</b> 
+      However, it seems JavaScript is either disabled or not supported by your browser. 
+      To view Google Maps, enable JavaScript by changing your browser options, and then 
+      try again.
+    </noscript> 
+ 
+ 
+    <script type="text/javascript"> 
+    //<![CDATA[
+    
+    if (GBrowserIsCompatible()) { 
+ 
+      // A function to create the marker and set up the event window
+      // Dont try to unroll this function. It has to be here for the function closure
+      // Each instance of the function preserves the contends of a different instance
+      // of the "marker" and "html" variables which will be needed later when the event triggers.    
+      function createMarker(point,html) {
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+          marker.openInfoWindowHtml(html);
+        });
+        return marker;
+      }
+ 
+      // Display the map, with some controls and set the initial location 
+      var map = new GMap2(document.getElementById("map"));
+      map.addControl(new GLargeMapControl());
+      map.addControl(new GMapTypeControl());
+      map.setCenter(new GLatLng(21.94304553343818, 78.310546875), 5);
+      GEvent.addListener(map, "click", function(overlay, latlng) {
+          //alert("You clicked the map."+" on overlay: " + overlay + ", latlng: " + latlng);
+	  if ( latlng ) {
+	      // var myHtml = "The GPoint value is: " + map.fromLatLngToDivPixel(latlng) + " at zoom level " + map.getZoom();
+	      // map.openInfoWindow(latlng, myHtml);
+	      search_nearest_city(map, latlng.lat(), latlng.lng());
+	  }
+
+      }); 
+    }
+    
+    // display a warning if the browser was not compatible
+    else {
+      alert("Sorry, the Google Maps API is not compatible with this browser");
+    }
+
+var spellcheckinput='';
+
+var spellcheck = function (data) {
+    var found = false;
+    var url='';
+    var text = data [0];
+    
+    // if (text != document.getElementById ('spellcheckinput').value)
+    // 	return;
+    if (text != spellcheckinput)
+	return;
+    
+    for (i=0; i<data [1].length; i++) {
+	if (text.toLowerCase () == data [1] [i].toLowerCase ()) {
+	    found = true;
+            url ='http://en.wikipedia.org/wiki/' + text;
+	    $('#id_info_window').append('<div style="float: left;"><b style="color:green"> W</b> - <a target="_blank" href="' + url + '">'+text+'</a></div>');
+	}
+    }
+    
+    // if (! found)
+    // 	document.getElementById ('spellcheckresult').innerHTML = '<b style="color:red">Incorrect</b>';
+    spellcheckinput = '';
+};
+
+var getjs = function (value) {
+    if (! value)
+	return;
+    
+    url = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+value+'&format=json&callback=spellcheck';
+    
+    // document.getElementById ('spellcheckresult').innerHTML = 'Checking ...';
+    var elem = document.createElement ('script');
+    elem.setAttribute ('src', url);
+    elem.setAttribute ('type','text/javascript');
+    document.getElementsByTagName ('head') [0].appendChild (elem);
+};
+
+
+function search_nearest_city(map, latitude, longitude) {
+    // alert(latitude + " " + longitude);
+    $.getJSON("/gmap/search_ajax/",
+              {
+                  lat: latitude,
+                  lon: longitude
+              },
+              function(data) {
+                  lat = data.latitude;
+                  lon = data.longitude;
+		  city_name = data.city_name;
+		  
+		  var point = new GLatLng(lat, lon);
+		  var marker = createMarker(point,'Closest city here is '+ city_name)
+		  map.addOverlay(marker);
+		  map.setCenter(point, 9);
+		  //do_wikipedia(city_name);
+		  spellcheckinput = city_name;
+		  getjs(city_name);
+              }
+             );
+}
+
+function do_wikipedia(city) {
+    $.getJSON("/gmap/wikipedia_ajax/",
+              {
+                  q: city,
+              },
+              function(data) {
+		  var html_text = "<div style='float: left'>"+data+"</div>";
+		  // $('#id_info_window').append(html_text);
+		  alert(data);
+              }
+             );
+
+}
+
+
+    //]]>
+    </script> 
+  </body> 
+ 
+</html> 

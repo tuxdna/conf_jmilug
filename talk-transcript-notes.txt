@@ -1,0 +1,74 @@
+History of Web:
+
+Back in the year 1989, Tim Berners-Lee ( at CERN ) wrote a proposal based on ENQUIRE, to write an information system. This system was targeted to meet the need of Physists at CERN to share information with each other. Web is a "Side Effect" of the 40 years of Particle Physics Experiments.
+
+On August 6, 1991, the first website was built at CERN. On the same date Tim also posted a short summary of the World Wide Web project on the alt.hypertext newsgroup. This date also marked the debut of the Web as a publicly available service on the Internet. 
+
+Mid 1990s was the era when Web Development had started to evolve. This was the era of evolution of Web Browsers and Web Servers. The very first web browser WorldWideWeb ( which was also on editor ) was created by Tim. It was actually Mosaic web browser, developed at NCSA and released on 23rd January 1993, ( released for Unix, Windows 3.0, Amiga 2.0 ), which made the web even more popular. As the popularity increased, the demand for processing power from the web-server's end also increased. A suite of Mozilla projects ( including Firefox web browser ) are among descendendts of Mosaic web browser itself.
+
+"""
+Marc Andreessen, the leader of the team that developed Mosaic, left NCSA and, with James H. Clark, one of the founders of Silicon Graphics, Inc. (SGI), and four other former students and staff of the University of Illinois, started Mosaic Communications Corporation. Mosaic Communications eventually became Netscape Communications Corporation, producing Netscape Navigator. 
+"""
+http://en.wikipedia.org/wiki/Mosaic_%28web_browser%29
+
+Until 1995, it was only HTML that was used to present content on the web. The late mid-1990s saw commercialization of WWW. Which resulted in emerging technologies like Java Applets in 1995, and Macromedia Flash i 1996. The later technology changed the way content would be delivered on the web. A whole new set of primitives were available to the developers now with availability of Flash.
+
+The years 1999 to 2001 were the years of dot com boom and burst. During this time Microsoft had released an ActiveX component called XMLHTTP which laid the foundation of AJAX. It was still evolving until applications like Gmail and Google Map used it to a huge extent. AJAX term coined on February 18, 2005 by Jesse James Garrett in an article entitled Ajax: A New Approach to Web Applications. AJAX - it Comprises of HTML, XHTML, CSS, DOM, XML, XMLHttpRequest, JavaScript.
+
+And now the latest buzzword on over the web is HTML5. Its important to note that HTML5 is still under development and there hasn't been any final release of its specification. This is the technology that made Steve Jobs ponder over and give his "Thoughts on Flash". Of his thoughts, he says that Flash is is a memory-hog, it is prorietary and a closed-specification and is too difficult to deal with, hence it won't be supported on Apple mobile devices.
+
+What's new with HTML5 you may ask? In simple terms it is just a bunch of tags and features namely: video, audio, canvas, local storage, web sql etc. Its only when you apply creativity, that you realize full potential of HTML5.
+
+JavaScript is the key language of the web now. It is very easy to determine that JavaScript is the most deployed programming language in the world.
+
+A promising super-fast implementation of JavaScript is SquirrelFish. It which will convert the code into native machine code before it is run on the web browser. SquirrelFish has a register based VM.
+
+http://www.webkit.org/blog/189/announcing-squirrelfish/
+
+At present HTML5 is not a replacemtent for flash. Not yet. However it provides several primitives which lets you do tasks for which Flash was the only alternative. A JavaScript development platform is needed now, which would supplement the needs of a Flash developer, who is now willing to switch over to HTML5.
+
+Recently, Adobe released an experimental project named Wallaby, which converts Flash files into equivalent HTML5 content.
+
+Flash to HTML5 converter - http://labs.adobe.com/technologies/wallaby/
+
+Now lets trace some things about web servers.
+
+The very first web server was the CERN HTTPd. However it was NCSA httpd that became most popular during its time. When its main developer, Robert McCool left NCSA in 1994, development of NCSA httpd stalled. It was bad thing to happen as there were a lot of people who depended on this web server. It was then that a small group webmasters got in contact via email and, took the NCSA httpd code as a base and started a public domain project called Apache httpd.
+
+
+Approaches to web-development:
+
+It is not practical to design and develop every new Web application from the ground up. We would have to keep building the same functional components that accept and interpret user requests, authenticate and authorize the requestors, access and transform requested data, and construct and transmit final responses. Many of these components would be identical across different applications. Web servers provide application developers with well-defined endpoints—the acceptance of requests and transmission of responses. Some servers also lay the simple groundwork for building and deploying Web applications. In practice, such groundwork is not enough: what is needed is the additional infrastructure to facilitate Web application development and deployment.
+
+
+What does a Web Application framework do? It primarily allows separation of content from presentation.
+
+
+Approaches to web-development:
+1. Scripting or programmatic approaches - CGI, Java Servlets
+   Basically allows access REQUEST / URL parameters
+   Basic primitive to generate content is output statement.
+ 
+2. Template approaches - SSI, ColdFusion, WebMacro/Veolcity
+   Focus on formatting of content
+   Naturally, more appealing to web designers
+
+3. Hybrid approaches - PHP, ASP, JSP
+   Focus on formatting of content
+   Code can be embedded inside special tags
+   
+4. Frameworks -
+   MVC - JSP 'Model 2' / J2EE, Struts, Django, Ruby on Rails, Zend Framework, CakePHP etc.
+   Separation of data/content and presentation
+
+   N-Tier architecture: 3-tier
+   Presentation
+   Application
+   Data
+
+Some more frameworks/technologies which you may want to know are:
+RoR - MVC framework using Ruby language. Syntactically pleasing to developers. Lots of fan following. Its hot.
+Django - MVC framework using python. Many plugins available. Deployment is not as straightforard as compared to PHP, however Django is much more manageable.
+Enterprise Java- Nothing beats it the enterprise world. Every possible functionality is perhaps already implemented. It is enterprise ready. Lots of community support. Steeper learning curve.
+
+
